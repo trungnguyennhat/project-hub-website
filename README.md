@@ -1,6 +1,6 @@
 # ProjectHub — Fullstack Project Management System
 
-> **Current status:** Phase 0 — chưa bắt đầu
+> **Current status:** Phase 0 — đang làm dở. Đã xong: Docker Compose Postgres, cài Prisma + migration đầu tiên (đã có model `User`, `RefreshToken`). Còn thiếu: cấu trúc thư mục 3 lớp (Controller/Service/Repository), ESLint + Prettier + chuẩn commit. Phase 1 (Auth) và frontend chưa bắt đầu.
 > *(Cập nhật dòng này mỗi khi sang phase mới, để AI agent biết bạn đang ở đâu.)*
 
 ---
