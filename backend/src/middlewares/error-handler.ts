@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { ZodError } from "zod";
 import { AppError } from "../utils/app-error";
 import { sendError } from "../utils/api-response";
 
@@ -19,6 +20,14 @@ export function globalErrorHandler(
     // ví dụ: throw new AppError("Not Found", statusCode) -> sẽ được xử lý tại đây
   if (err instanceof AppError) {
     sendError(res, err.message, err.statusCode);
+    return;
+  }
+
+  // lỗi là object của ZodError, trong object chứa 1 mảng issues
+  // duyệt issues lấy ra message của từng issue -> map và nối các message thành 1 chuỗi cách nhau dấu , 
+  // -> gửi phản hồi lỗi API qua sendError
+  if (err instanceof ZodError) {
+    sendError(res, err.issues.map((issue) => issue.message).join(", "), 400);
     return;
   }
 
