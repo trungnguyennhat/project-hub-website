@@ -1,5 +1,5 @@
-// class con của Error, tạo ra object của AppError có 4 tham số: message (string), statusCode (number), isOperational (boolean), stack (string)
-// khi tạo object, sẽ nhận vào 2 tham số: message (string), statusCode (number)
+// class con của Error, tạo ra object của AppError nhận 2 tham số đầu vào: message (string), statusCode (number), 
+// ngoài ra sẽ có thêm 2 thuộc tính được gán mặc định: isOperational (boolean), stack (string)
 export class AppError extends Error {
   public readonly statusCode: number;
   public readonly isOperational = true;

@@ -16,14 +16,14 @@ export function globalErrorHandler(
   res: Response,
   _next: NextFunction,
 ) {
-    // nếu lỗi được xử lý là object của AppError -> gửi phản hồi lỗi API qua sendError
-    // ví dụ: throw new AppError("Not Found", statusCode) -> sẽ được xử lý tại đây
+  // nếu lỗi được xử lý là object của AppError -> gửi phản hồi lỗi API qua sendError
+  // ví dụ: throw new AppError("Not Found", statusCode) -> sẽ được xử lý tại đây
   if (err instanceof AppError) {
     sendError(res, err.message, err.statusCode);
     return;
   }
 
-  // lỗi là object của ZodError, trong object chứa 1 mảng issues
+  // lỗi là object của ZodError, trong ZodError object chứa 1 mảng issues
   // duyệt issues lấy ra message của từng issue -> map và nối các message thành 1 chuỗi cách nhau dấu , 
   // -> gửi phản hồi lỗi API qua sendError
   if (err instanceof ZodError) {

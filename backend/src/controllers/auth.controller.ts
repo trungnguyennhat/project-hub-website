@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { registerSchema } from "../schemas/auth.schema";
+import { registerSchema, loginSchema } from "../schemas/auth.schema";
 import { authService } from "../services/auth.service";
 import { sendSuccess } from "../utils/api-response";
 
@@ -12,3 +12,15 @@ export async function register(req: Request, res: Response, next: NextFunction) 
     next(error);
   }
 }
+
+export async function login(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = loginSchema.parse(req.body);
+    const result = await authService.login(input);
+    sendSuccess(res, result, 200);
+  } catch (error) {
+    next(error);
+  }
+}
+
+
