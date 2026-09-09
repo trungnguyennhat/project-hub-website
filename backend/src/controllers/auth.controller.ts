@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { registerSchema, loginSchema } from "../schemas/auth.schema";
+import { registerSchema, loginSchema, refreshSchema } from "../schemas/auth.schema";
 import { authService } from "../services/auth.service";
 import { sendSuccess } from "../utils/api-response";
 
@@ -23,4 +23,12 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-
+export async function refresh(req: Request, res: Response, next: NextFunction) {
+  try {
+    const input = refreshSchema.parse(req.body);
+    const result = await authService.refresh(input);
+    sendSuccess(res, result);
+  } catch (error) {
+    next(error);
+  }
+}

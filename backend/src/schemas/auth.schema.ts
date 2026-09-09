@@ -10,8 +10,13 @@ export const registerSchema = z.object({
 export const loginSchema = z.object({
   email: z.email("Invalid email"),
   password: z.string().min(1, "Password is required"),
-})
+});
+
+export const refreshSchema = z.object({
+  refreshToken: z.string().min(1, "Refresh token is required"),
+});
 
 // tạo 1 type RegisterInput từ schema registerSchema để sử dụng trong các function khác
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type RefreshInput = z.infer<typeof refreshSchema>;

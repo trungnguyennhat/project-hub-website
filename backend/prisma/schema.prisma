@@ -22,7 +22,7 @@ model User {
 model RefreshToken {
   id        String   @id @default(uuid())
   userId    String   @map("user_id")
-  token     String   @unique
+  tokenHash String   @unique @map("token")
   expiredAt DateTime @map("expired_at")
   createdAt DateTime @default(now()) @map("created_at")
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
